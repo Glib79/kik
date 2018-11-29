@@ -97,7 +97,7 @@ class SceneBase:
             4 - y axis shift eg. 10, -20
             eg. ('c', -20, 't', '-10') - means set point -20px form screen center in x axis and -10px form top screen in y axis 
         output
-        tuple with 2 coordinates x and y eg. (100, 150)
+        list with 2 coordinates x and y eg. [100, 150]
         """
         w, h = self.pygame.display.get_surface().get_size()
         x = 0
@@ -117,7 +117,7 @@ class SceneBase:
         elif params[2] == 'b':
             y = h + params[3]
         
-        return (x, y)
+        return [x, y]
 
 class StartScene(SceneBase):
     """
