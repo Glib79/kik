@@ -33,7 +33,7 @@ def main(width, height, fps, starting_scene):
                 hands = []
                 for player in players:
                     if player[1] != 2:
-                        hands.append(hand.Hand([10,100], player))
+                        hands.append(hand.Hand((10,100), player))
                 
                 active_scene.set_data(table.Table('data.txt', tile, [350, 220]), hands, myfont)
 

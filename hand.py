@@ -40,7 +40,9 @@ class Hand(object):
         
     def rem_chosen_tile(self):
         """ Remove chosen tile from hand """
-        del self.tiles[self.chosen]
+        if self.tiles:
+            del self.tiles[self.chosen]
+            
         if self.tiles:
             self.chosen = 0
             pos = self.get_pos_on_hand(0)
