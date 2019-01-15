@@ -17,14 +17,31 @@ class TestHand(unittest.TestCase):
         
     def tearDown(self):
         self.hand = None
+    
+    # new hand object should have some parameters
+    
+    def test_init(self):
+        self.assertListEqual(self.hand.tiles, [])
+        self.assertGreaterEqual(self.hand.size, 0)
+        self.assertEqual(self.hand.chosen, 0)
+        self.assertTupleEqual(self.hand.start_position, (0,0))
+        self.assertEqual(self.hand.name, 'Red')
+        self.assertEqual(self.hand.type, 0)
+        self.assertEqual(self.hand.color, 'r')
+        self.assertGreaterEqual(self.hand.space, 0)
+        self.assertEqual(self.hand.points, 0)
+        self.assertFalse(self.hand.end)
+        
+        player2 = ['', 0, 'r']
+        hand2 = hand.Hand((0,0), player2)
+        self.assertEqual(hand2.name, 'Player ' + str(hand.Hand.chnd))
         
     # hand.len() count tiles on hand
     
-    def test_len_0(self):
+    def test_len(self):
         # new created hand should have len = 0
         self.assertEqual(len(self.hand), 0)
 
-    def test_len_2(self):
         # add two hand 2 tiles and check its len
         t1 = tile.Tile(['r','g','g','g','g','b','r','y',1,1,0,0,0,0,1,1])
         t2 = tile.Tile(['r','b','b','b','g','b','y','r',1,1,0,0,1,1,0,0])
@@ -46,26 +63,18 @@ class TestHand(unittest.TestCase):
         
     # add_points changes points amount on hand
     
-    def test_add_points_0(self):
+    def test_add_points(self):
         # add 0 points shouldn't change amount of points
         points = self.hand.points
         self.hand.add_points(0)
         self.assertEqual(self.hand.points, points)
 
-    def test_add_points_1(self):
         # add 1 points should change amount of points +1
         points = self.hand.points
         points += 1
         self.hand.add_points(1)
         self.assertEqual(self.hand.points, points)
 
-    def test_add_points_m1(self):
-        # add -1 points should change amount of points -1
-        points = self.hand.points
-        points -= 1
-        self.hand.add_points(-1)
-        self.assertEqual(self.hand.points, points)
-        
     # rem_chosen_tile romoves tile from hand
     
     def test_rem_chosen_tile_0(self):
@@ -108,10 +117,9 @@ class TestHand(unittest.TestCase):
         
     # get_pos_on_hand returns tile position
     
-    def test_get_pos_on_hand_0(self):
+    def test_get_pos_on_hand(self):
         self.assertTupleEqual(self.hand.start_position, self.hand.get_pos_on_hand(0))
 
-    def test_get_pos_on_hand_1(self):
         pos_1 = (self.hand.start_position[0], self.hand.start_position[1] + self.hand.size + self.hand.space)
         self.assertTupleEqual(pos_1, self.hand.get_pos_on_hand(1))
         
